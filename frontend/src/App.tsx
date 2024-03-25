@@ -1,34 +1,30 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { MenuItem, Select, SelectChangeEvent } from "@mui/material"
+import Navbar from "./components/Navbar"
+import { useState } from "react"
 
-function App() {
-  const [count, setCount] = useState(0)
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+const App = () => {
+  const [numOfPeople, setNumOfPeople] = useState<number>(2)
+  const numOfPeopleRange = [2, 3, 4, 5, 6, 7, 8] // reservations are only allowed for parties of 2 up to 8
+
+
+  const onSelectChange = (e: SelectChangeEvent) => {
+    setNumOfPeople(parseInt(e.target.value))
+  }
+  console.log(numOfPeople)
+  return(
+    <div className="min-h-screen p-4">
+      <Navbar />
+      <Select
+        defaultValue={numOfPeople.toString()}
+        value={numOfPeople.toString()}
+        onChange={onSelectChange}
+      >
+        {numOfPeopleRange.map(num => (
+          <MenuItem key={num} value={num}>{`${num} people`}</MenuItem>
+        ))}
+      </Select>
+    </div>
   )
 }
 
