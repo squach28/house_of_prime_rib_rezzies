@@ -2,3 +2,7 @@
 @tailwind utilities;
 @tailwind base;
 @tailwind components;
+
+html {
+    font-family: 'Edu NSW Act Foundation', 'sans-serif'
+}
